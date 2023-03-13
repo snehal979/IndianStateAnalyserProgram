@@ -18,6 +18,10 @@ namespace IndianStatesProgram.Files_StatePopulationn
         /// <returns></returns>
         public int ReadStateCencusData(string filepath)
         {
+            if (!File.Exists(filepath))
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.FILE_INCORRECT_PATH, "File path is incorrect");
+            }
             using (var reader = new StreamReader(filepath))
             using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
