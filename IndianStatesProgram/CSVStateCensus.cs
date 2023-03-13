@@ -43,5 +43,25 @@ namespace IndianStatesProgram.Files_StatePopulationn
                 return records.Count()-1;
             }
         }
+        /// <summary>
+        /// Uc 5 check Header is correct or not
+        /// </summary>
+        /// <param name="filepath"></param>
+        /// <param name="actualHeader"></param>
+        /// <returns></returns>
+        /// <exception cref="ExceptionStateCensus"></exception>
+        public bool ReadStateDataHeader(string filepath, string actualHeader)
+        {
+            var read = File.ReadAllLines(filepath);
+            string header = read[0];
+            if (header.Equals(actualHeader))
+            {
+                return true;
+            }
+            else
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.HEADER_INCORRECT, "File header is incorrect");
+            }
+        }
     }
 }

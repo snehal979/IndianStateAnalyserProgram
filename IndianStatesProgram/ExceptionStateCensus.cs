@@ -12,7 +12,8 @@ namespace IndianStatesProgram
         {
             FILE_INCORRECT_PATH,
             TYPE_INCORRECT,
-            DELINE_INCORRECT
+            DELINE_INCORRECT,
+            HEADER_INCORRECT
         }
         public ExceptionTypes type;
         public ExceptionStateCensus(ExceptionTypes type, string message) : base(message)

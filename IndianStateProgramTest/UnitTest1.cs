@@ -17,6 +17,7 @@ namespace IndianStateProgramTest
             int actual = csv.ReadStateCencusData(filePopulationPath);
             Assert.AreEqual(28, actual);
         }
+
         /// <summary>
         /// Uc 1 Test case For file 
         /// </summary>
@@ -28,12 +29,28 @@ namespace IndianStateProgramTest
         [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\StateTxtFile.txt", "File type is incorrect")]
         ////Uc1-4 TEST CASE FOR DELINE LINE 
         [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\delineFileStatePopulation.csv", "File deline is incorrect")]
-
         public void GivenStateCensusData_IncorrectFiledata_WhenAnalyzer_ShouldReturnExceptionMessage(string Incorrectfile,string expectMsg)
         {
             try
             {
                 int Records = csv.ReadStateCencusData(Incorrectfile);
+            }
+            catch (ExceptionStateCensus ex)
+            {
+                Assert.AreEqual(ex.Message, expectMsg);
+            }
+        }
+        /// <summary>
+        /// Uc1_5 test case for Header // Spealling mistake in file header name -pass correct file name 
+        /// </summary>
+        [TestMethod]
+        [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\StatePopulationFile.csv", "File header is incorrect")]
+        public void GivenStateCensusData_IncorrectHeader_WhenAnalyzer_ShouldReturnExceptionMessage(string Incorrectfile, string expectMsg)
+        {
+            try
+            {
+                bool record = csv.ReadStateDataHeader(Incorrectfile, "State/Population,AreaInSqKm,DensityPerSqKm");
+                Assert.IsTrue(record);
             }
             catch (ExceptionStateCensus ex)
             {
