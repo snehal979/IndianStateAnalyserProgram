@@ -6,7 +6,7 @@ namespace IndianStateProgramTest
     public class UnitTest1
     {
         string filePopulationPath = @"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\StatePopulationFile.csv";
-        string Incorrectfilepath = @"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files1_StatePopulationn\StatePopulationFile.csv";
+
         CSVStateCensus csv = new CSVStateCensus();
         /// <summary>
         /// Uc1 Check Record Count
@@ -18,18 +18,23 @@ namespace IndianStateProgramTest
             Assert.AreEqual(28, actual);
         }
         /// <summary>
-        /// Uc 1_2Test case For file is Exist or not
+        /// Uc 1 Test case For file 
         /// </summary>
         [TestMethod]
-        public void GivenStateCensusData_IncorrectFilepath_WhenAnalyzer_ShouldReturnExceptionMessage()
+
+        ////Uc 1_2Test case For file is Exist or not(incorrectpath)
+        [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files1_StatePopulationn\StatePopulationFile.csv", "File path is incorrect")]
+        ////Uc1_3 Test case for incorrect file type
+        [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\StateTxtFile.txt", "File type is incorrect")]
+        public void GivenStateCensusData_IncorrectFiledata_WhenAnalyzer_ShouldReturnExceptionMessage(string Incorrectfile,string expectMsg)
         {
             try
             {
-                int Records = csv.ReadStateCencusData(Incorrectfilepath);
+                int Records = csv.ReadStateCencusData(Incorrectfile);
             }
             catch (ExceptionStateCensus ex)
             {
-                Assert.AreEqual(ex.Message, "File path is incorrect");
+                Assert.AreEqual(ex.Message, expectMsg);
             }
         }
     }
