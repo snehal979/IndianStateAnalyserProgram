@@ -26,6 +26,9 @@ namespace IndianStateProgramTest
         [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files1_StatePopulationn\StatePopulationFile.csv", "File path is incorrect")]
         ////Uc1_3 Test case for incorrect file type
         [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\StateTxtFile.txt", "File type is incorrect")]
+        ////Uc1-4 TEST CASE FOR DELINE LINE 
+        [DataRow(@"C:\Users\hp\Desktop\newBatch2\IndianStatesProgram\IndianStatesProgram\Files_StatePopulationn\delineFileStatePopulation.csv", "File deline is incorrect")]
+
         public void GivenStateCensusData_IncorrectFiledata_WhenAnalyzer_ShouldReturnExceptionMessage(string Incorrectfile,string expectMsg)
         {
             try

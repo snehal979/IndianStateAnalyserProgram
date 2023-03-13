@@ -26,6 +26,12 @@ namespace IndianStatesProgram.Files_StatePopulationn
             {
                 throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.TYPE_INCORRECT, "File type is incorrect");
             }
+            var read = File.ReadAllLines(filepath);
+            string hrader = read[0];
+            if (hrader.Contains("/"))
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.DELINE_INCORRECT, "File deline is incorrect");
+            }
             using (var reader = new StreamReader(filepath))
             using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
             {

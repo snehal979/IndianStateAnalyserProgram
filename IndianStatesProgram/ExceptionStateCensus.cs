@@ -11,7 +11,8 @@ namespace IndianStatesProgram
         public enum ExceptionTypes
         {
             FILE_INCORRECT_PATH,
-            TYPE_INCORRECT
+            TYPE_INCORRECT,
+            DELINE_INCORRECT
         }
         public ExceptionTypes type;
         public ExceptionStateCensus(ExceptionTypes type, string message) : base(message)
