@@ -44,7 +44,7 @@ namespace IndianStatesProgram.Files_StatePopulationn
             }
         }
         /// <summary>
-        /// Uc 5 check Header is correct or not
+        /// Uc1.5,2.5 check Header is correct or not
         /// </summary>
         /// <param name="filepath"></param>
         /// <param name="actualHeader"></param>
@@ -61,6 +61,39 @@ namespace IndianStatesProgram.Files_StatePopulationn
             else
             {
                 throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.HEADER_INCORRECT, "File header is incorrect");
+            }
+        }
+        /// <summary>
+        /// Uc2 States Code Information
+        /// </summary>
+        /// <param name="codeFilePath"></param>
+        /// <returns></returns>
+        public int ReadStae_CodeData(string codeFilePath)
+        {
+            if (!File.Exists(codeFilePath))
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.FILE_INCORRECT_PATH, "File path is incorrect");
+            }
+            if (!codeFilePath.EndsWith(".csv"))
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.TYPE_INCORRECT, "File type is incorrect");
+            }
+            var read = File.ReadAllLines(codeFilePath);
+            string hrader = read[0];
+            if (hrader.Contains("/"))
+            {
+                throw new ExceptionStateCensus(ExceptionStateCensus.ExceptionTypes.DELINE_INCORRECT, "File deline is incorrect");
+            }
+
+            using (var readCode = new StreamReader(codeFilePath))
+            using (var csvReaderCode = new CsvReader(readCode, CultureInfo.InvariantCulture))
+            {
+                var records = csvReaderCode.GetRecords<CodeStateDOA>().ToList();
+                foreach (var data in records)
+                {
+                    Console.WriteLine(data.SrNo+" "+data.State+" "+data.NameNos+" "+data.TIN);
+                }
+                return records.Count() -1;
             }
         }
     }
