@@ -16,7 +16,7 @@ namespace IndianStatesProgram.Files_StatePopulationn
         /// </summary>
         /// <param name="filepath"></param>
         /// <returns></returns>
-        public void ReadStateCencusData(string filepath)
+        public int ReadStateCencusData(string filepath)
         {
             using (var reader = new StreamReader(filepath))
             using (var csvReader = new CsvReader(reader, CultureInfo.InvariantCulture))
@@ -26,6 +26,7 @@ namespace IndianStatesProgram.Files_StatePopulationn
                 {
                     Console.WriteLine("State: "+data.State+"\nPopulation: "+data.Population+"\nArea: "+data.AreaInSqKm+"\nDensity:"+data.DensityPerSqKm+"\n ");
                 }
+                return records.Count()-1;
             }
         }
     }
